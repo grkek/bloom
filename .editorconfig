@@ -1,0 +1,49 @@
+root = true
+
+[*.cr]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+
+          definitions.each do |definition|
+            next unless definition.argument
+            next unless definition.return_type
+
+            argument = definition.argument.not_nil!
+
+            string << "message #{argument.name} {\n"
+
+            argument.properties.each do |argument_property|
+              required = !argument_property["type"].includes?("?")
+              native, type = Bloom::Utils.to_protobuf_type(argument_property["type"])
+
+              if required
+                string << "  #{type} #{argument_property["name"]} = #{argument.properties.index(argument_property).not_nil! + 1};\n"
+              else
+                string << "  optional #{type} #{argument_property["name"]} = #{argument.properties.index(argument_property).not_nil! + 1};\n"
+              end
+            end
+
+            string << "}\n\n"
+
+            return_type = definition.return_type.not_nil!
+
+            string << "message #{return_type.name} {\n"
+
+            return_type.properties.each do |return_type_property|
+              required = !return_type_property["type"].includes?("?")
+              native, type = Bloom::Utils.to_protobuf_type(return_type_property["type"])
+
+              if required
+                string << "  #{type} #{return_type_property["name"]} = #{return_type.properties.index(return_type_property).not_nil! + 1};\n"
+              else
+                string << "  optional #{type} #{return_type_property["name"]} = #{return_type.properties.index(return_type_property).not_nil! + 1};\n"
+              end
+            end
+
+            string << "}\n\n"
+          end

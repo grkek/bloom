@@ -1,0 +1,13 @@
+name: bloom
+version: 0.1.0
+
+authors:
+  - Giorgi Kavrelishvili <giorgi.kavrelishvili@pm.me>
+
+dependencies:
+  protobuf:
+    github: jeromegn/protobuf.cr
+
+crystal: 1.9.2
+
+license: MIT
