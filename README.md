@@ -1,6 +1,6 @@
 # Bloom
 
-A WIP implementation of Twirp
+An implementation of a Twirp server
 
 ## Installation
 
@@ -13,6 +13,10 @@ A WIP implementation of Twirp
    ```
 
 2. Run `shards install`
+
+## Usage
+
+See the example folder for usage
 
 ## Contributing
 

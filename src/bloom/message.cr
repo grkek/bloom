@@ -245,7 +245,7 @@ module Bloom
       {% begin %}
           {% properties = {} of Nil => Nil %}
           {% for ivar in @type.instance_vars %}
-            {% ann = ivar.annotation(::JSON::Field) %}
+            {% ann = ivar.annotation(Bloom::Message::Field) %}
             {% unless ann && (ann[:ignore] || ann[:ignore_deserialize]) %}
               {%
                 properties[ivar.id] = {
@@ -345,7 +345,7 @@ module Bloom
 
           {% properties = {} of Nil => Nil %}
           {% for ivar in @type.instance_vars %}
-            {% ann = ivar.annotation(::JSON::Field) %}
+            {% ann = ivar.annotation(Bloom::Message::Field) %}
             {% unless ann && (ann[:ignore] || ann[:ignore_serialize] == true) %}
               {%
                 properties[ivar.id] = {

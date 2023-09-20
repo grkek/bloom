@@ -9,6 +9,7 @@ module Borjomi
 
       def increase_pressure(request : IncreasePressure::Request) : IncreasePressure::Response
         pressure = (request.over_time * request.slope) ** request.intensity
+
         IncreasePressure::Response.new(id: request.id, pressure: pressure)
       end
     end
