@@ -20,10 +20,8 @@ module Bloom
             when {{method.name.stringify}}
               case content_type
               when "application/json"
-                Log.debug { "Casting into #{{{method.args.first.restriction.stringify}}} and executing #{method_name.underscore} using JSON parser" }
                 return {{method.name.id}}({{method.args.first.restriction}}.from_json(body))
               when "application/protobuf"
-                Log.debug { "Casting into #{{{method.args.first.restriction.stringify}}} and executing #{method_name.underscore} using Protobuf parser" }
                 return {{method.name.id}}({{method.args.first.restriction}}.from_protobuf(body))
               else
                 raise Bloom::Exceptions::BadRequest.new("Content Type #{content_type} is not supported")

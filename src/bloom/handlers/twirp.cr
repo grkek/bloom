@@ -14,7 +14,7 @@ module Bloom
         service_name = name(service.name)
         @services[service_name] = service
 
-        Log.debug { "Added #{service_name} to the services" }
+        Log.info { "Added #{service_name} to the services" }
       end
 
       def add_service(services : Array(Service))
@@ -22,12 +22,12 @@ module Bloom
           service_name = name(service.name)
           @services[service_name] = service
 
-          Log.debug { "Added #{service_name} to the services" }
+          Log.info { "Added #{service_name} to the services" }
         end
       end
 
       def call(context : HTTP::Server::Context)
-        raise Exceptions::MethodNotAllowed.new("Method not allowed") if context.request.method != "POST"
+        raise Exceptions::MethodNotAllowed.new("Only allowed method to this endpoint is POST") if context.request.method != "POST"
 
         content_type = context.request.headers["Content-Type"]
 
